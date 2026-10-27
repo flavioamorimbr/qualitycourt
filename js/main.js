@@ -62,3 +62,38 @@
     });
   });
 })();
+
+/* ===== Portfólio: filtro e tela cheia ===== */
+(function(){
+  var grid=document.getElementById('pfGrid'); if(!grid) return;
+  var items=[].slice.call(grid.querySelectorAll('.pf-item'));
+  var chips=[].slice.call(document.querySelectorAll('.pf-chip'));
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var f=c.dataset.filter;
+      chips.forEach(function(x){ var on=x===c; x.classList.toggle('is-on',on); x.setAttribute('aria-pressed',on); });
+      items.forEach(function(it){ var show=f==='todas'||it.dataset.cat===f; it.classList.toggle('is-hidden',!show); if(show) it.classList.add('in'); });
+    });
+  });
+  var lb=document.getElementById('lightbox'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCap'), cnt=document.getElementById('lbCount');
+  var list=[], pos=0, lastFocus=null;
+  function visible(){ return items.filter(function(it){ return !it.classList.contains('is-hidden'); }); }
+  function show(){
+    var it=list[pos], im=it.querySelector('img');
+    img.src=im.currentSrc||im.src; img.alt=im.alt;
+    cap.innerHTML='<b>'+it.querySelector('figcaption b').textContent+'</b><span>'+it.querySelector('figcaption span').textContent+'</span>';
+    cnt.textContent=(pos+1)+' de '+list.length;
+    img.style.animation='none'; void img.offsetWidth; img.style.animation='';
+  }
+  function open(it){ list=visible(); pos=list.indexOf(it); lastFocus=document.activeElement; lb.hidden=false; document.body.style.overflow='hidden'; show(); lb.querySelector('.lb-close').focus(); }
+  function close(){ lb.hidden=true; document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  function step(d){ pos=(pos+d+list.length)%list.length; show(); }
+  items.forEach(function(it){ it.querySelector('.pf-open').addEventListener('click',function(){ open(it); }); });
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',function(){ step(-1); });
+  lb.querySelector('.lb-next').addEventListener('click',function(){ step(1); });
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') step(-1); if(e.key==='ArrowRight') step(1); });
+  var x0=null; lb.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true});
+  lb.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50) step(dx<0?1:-1); x0=null; });
+})();

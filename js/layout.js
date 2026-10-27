@@ -8,13 +8,11 @@
     { texto: "Quem somos",          link: "quem-somos.html" },
     { texto: "Serviços",            link: "servicos.html" },
     { texto: "Produtos",            link: "produtos.html" },
-    { texto: "Quadras finalizadas", link: "quadras-finalizadas.html" },
-    { texto: "Contato",             link: "contato.html" }
+    { texto: "Portfólio",           link: "portfolio.html" }
   ];
 
   var CONTATO = {
-    whatsapp: "5579991935073",
-    telefone: "(79) 99193-5073",
+    whatsapp: "5579991436105",
     email: "comercial@qualitycourt.com.br",
     endereco: "R. José Francisco Prejuízo, 266<br>Farolândia, Aracaju/SE · 49030-513",
     instagram: "https://www.instagram.com/qualitycourt"
@@ -36,7 +34,7 @@
     '<div class="wrap">' +
     '<a class="logo" href="index.html" aria-label="Quality Court, página inicial"><img src="img/logo-azul.webp" alt="Quality Court Engenharia Esportiva" width="600" height="326"></a>' +
     '<nav class="nav" id="nav" aria-label="Menu principal">' + itens +
-    '<a class="btn btn-lime nav-wa" href="' + waLink + '" target="_blank" rel="noopener">' + WA_ICON + ' WhatsApp</a>' +
+    '<a class="btn btn-lime nav-wa" href="' + waLink + '" target="_blank" rel="noopener">' + WA_ICON + ' Fale conosco agora</a>' +
     '</nav>' +
     '<button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>' +
     '</div></header>';
@@ -54,7 +52,7 @@
       '</div>' +
     '</div>' +
     '<div><h4>Páginas</h4><ul>' + paginasRodape + '</ul></div>' +
-    '<div><h4>Contato</h4><ul><li>' + CONTATO.telefone + '</li><li>' + CONTATO.email + '</li><li>' + CONTATO.endereco + '</li></ul></div>' +
+    '<div><h4>Contato</h4><ul><li><a href="' + waLink + '" target="_blank" rel="noopener">Fale conosco agora pelo WhatsApp</a></li><li>' + CONTATO.email + '</li><li>' + CONTATO.endereco + '</li></ul></div>' +
     '</div>' +
     '<div class="foot-bottom"><span>© ' + new Date().getFullYear() + ' Quality Court – Engenharia Esportiva. Todos os direitos reservados.</span>' +
     '<a href="politica-de-privacidade.html" style="text-decoration:none">Política de privacidade</a></div>' +
